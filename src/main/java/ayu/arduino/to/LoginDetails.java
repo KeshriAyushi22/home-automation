@@ -58,6 +58,9 @@ public class LoginDetails {
 	@JsonProperty("house")
 	private List<House> house;  //this is holding many values of house so to hold all the values rather than object it is taking list to hold that object.
 	
+	@JsonProperty("isActive")
+	@Column(name = "isActive", unique = true, nullable = false, length = 255)
+	private String isActive;
 	
 	
 	public List<House> getHouse() {
@@ -66,14 +69,15 @@ public class LoginDetails {
 	public void setHouse(List<House> house) {
 		this.house = house;
 	}
-	/*public int getLoginId() {
-		return loginId;
+
+	
+	
+	public String getIsActive() {
+		return isActive;
 	}
-	public void setLoginId(int loginId) {
-		this.loginId = loginId;
-	}*/
-	
-	
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 	public String getEmail() {
 		return email;
 	}
