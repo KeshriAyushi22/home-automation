@@ -35,14 +35,12 @@ public static void saveData(Object req) {
 			session.close();  
 		}
 
-public static List<LoginDetails> getDetails(LoginDetails request){
+public static LoginDetails getDetails(LoginDetails request){
 	Session session = HibernateUtil.getSessionFactory().openSession();
    Criteria criteria= session.createCriteria(LoginDetails.class);
    criteria.add(Restrictions.eq("email", request.getEmail()));
-	List<LoginDetails> list= criteria.list();
-	return list;
+    LoginDetails  obj = (LoginDetails) criteria.uniqueResult();
+	return obj;
 }
 
-
-		
 }

@@ -8,6 +8,7 @@ ayu\arduino\to\ApiRequest.class
 ayu\arduino\util\HibernateUtil.class
 ayu\arduino\service\Login.class
 ayu\arduino\util\IsNullorEmpty.class
+ayu\arduino\to\Appliance.class
 ayu\arduino\to\LoginDetails.class
 ayu\arduino\dao\DaoImpl.class
 ayu\arduino\helper\ValidationHelper.class

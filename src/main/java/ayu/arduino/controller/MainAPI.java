@@ -1,6 +1,7 @@
 package ayu.arduino.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -42,15 +43,18 @@ public class MainAPI {
 	public ApiResponse login(String request) throws JsonParseException, JsonMappingException, IOException {
 		
 		String error=null;
+		
 		ObjectMapper mapper = new ObjectMapper();
 		LoginDetails req= mapper.readValue(request, LoginDetails.class);
-		ApiResponse response=new ApiResponse();
+		ApiResponse response=null;
 		//validation
 		
 		if(IsNullorEmpty.isNullOrEmpty(error)) {
-		Login.dologin(req);
+		response = Login.dologin(req);
+		return response;
 		}
 		System.out.println("response"+response);
+		
 		return response;
 
 	}

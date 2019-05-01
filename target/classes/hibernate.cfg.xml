@@ -16,6 +16,8 @@
 		<property name="show_sql">true</property>
 		<mapping class="ayu.arduino.to.House"></mapping>
 		<mapping class="ayu.arduino.to.LoginDetails"></mapping>
+		<mapping class="ayu.arduino.to.Rooms"></mapping>
+		<mapping class="ayu.arduino.to.Appliance"></mapping>
 		
 	<!-- 	<mapping resource="Rooms.hbm.xml"></mapping> -->
 

@@ -24,29 +24,56 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @UniqueConstraint(columnNames = "androidId"),
 @UniqueConstraint(columnNames = "email") })
 public class LoginDetails {
+	
+	/*@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "loginId", unique = true, nullable = false)
+	private int loginId;*/
+	
+	@Id
 	@JsonProperty("email")
+	@Column(name = "email", unique = true, nullable = false,length = 255)
 	private String email;
+	
+	
 	@JsonProperty("androidId")
+	@Column(name = "androidId", unique = true, length = 255)
 	private String androidId;
+	
+	
 	@JsonProperty("ln")
+	@Column(name = "loginName", unique = true, length = 255)
 	private String loginName;
+	
 	@JsonProperty("token")
+	@Column(name = "token", unique = true, nullable = false, length = 255)
 	private String token;
+	
+	
 	@JsonProperty("pass")
+	@Column(name = "password", unique = true, nullable = false, length = 255)
 	private String password;
+	
+	@OneToMany(mappedBy="loginDetails" ,cascade=CascadeType.ALL)  //here mapped by value is the object created in house class for this pojo.
 	@JsonProperty("house")
 	private List<House> house;  //this is holding many values of house so to hold all the values rather than object it is taking list to hold that object.
 	
 	
-	@OneToMany(fetch = FetchType.LAZY ,mappedBy="loginDetails" ,cascade=CascadeType.ALL)  //here mapped by value is the object created in house class for this pojo.
+	
 	public List<House> getHouse() {
 		return house;
 	}
 	public void setHouse(List<House> house) {
 		this.house = house;
 	}
-	@Id
-	@Column(name = "email", unique = true, nullable = false)
+	/*public int getLoginId() {
+		return loginId;
+	}
+	public void setLoginId(int loginId) {
+		this.loginId = loginId;
+	}*/
+	
+	
 	public String getEmail() {
 		return email;
 	}
@@ -54,7 +81,7 @@ public class LoginDetails {
 		this.email = email;
 	}
 	
-	@Column(name = "androidId", unique = true, length = 10)
+	
 	public String getAndroidId() {
 		return androidId;
 	}
@@ -62,7 +89,7 @@ public class LoginDetails {
 		this.androidId = androidId;
 	}
 	
-	@Column(name = "loginName", unique = true, length = 10)
+	
 	public String getLoginName() {
 		return loginName;
 	}
@@ -70,14 +97,14 @@ public class LoginDetails {
 		this.loginName = loginName;
 	}
 	
-	@Column(name = "token", unique = true, nullable = false, length = 10)
+	
 	public String getToken() {
 		return token;
 	}
 	public void setToken(String token) {
 		this.token = token;
 	}
-	@Column(name = "password", unique = true, nullable = false, length = 10)
+	
 	public String getPassword() {
 		return password;
 	}
