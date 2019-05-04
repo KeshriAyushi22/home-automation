@@ -23,16 +23,16 @@ public class Register {
 
 		//inserting data into login db.
 		LoginDetails l= new LoginDetails();
-		l.setEmail("EmailNew@gmail.com");
-		l.setLoginName("AYUSHInew");
-		l.setAndroidId("AndroidNew");
-		l.setPassword("PassWordnew");
-		l.setToken("TokenNew");
+		l.setEmail("satyamNew@gmail.com");
+		l.setLoginName("satyamnew");
+		l.setAndroidId("Androidsatyamnew");
+		l.setPassword("PassWordsatyamnew");
+		l.setToken("TokenNew1");
 
 		//inserting 2 objects inside house db.
 		House h= new House();
-		h.setHouseName("House NAME3");
-		h.setAddress("Address 3");
+		h.setHouseName("House3");
+		h.setAddress("Address3");
 		h.setLoginDetails(l);   //since there is one mapping so add that object here.
 
 		House h1= new House();

@@ -18,18 +18,17 @@
 		<mapping class="ayu.arduino.to.LoginDetails"></mapping>
 		<mapping class="ayu.arduino.to.Rooms"></mapping>
 		<mapping class="ayu.arduino.to.Appliance"></mapping>
-		
-	<!-- 	<mapping resource="Rooms.hbm.xml"></mapping> -->
 
 
-		<!-- <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property> 
+		<!--<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property> 
 			<property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
-			<property name="hibernate.connection.username">ybxfipwpivdxjs</property> 
-			<property name="hibernate.connection.password">275f5a031348582a71c8514c5e0a15cbaed6dbb56361f6846c46c09a92f79f45</property> 
-			<property name="hibernate.connection.url">jdbc:postgresql://ec2-23-23-173-30.compute-1.amazonaws.com:5432/d5eudqekr7pm9t</property> 
+			<property name="hibernate.connection.username">obrrxpahtaxyso</property> 
+			<property name="hibernate.connection.password">86fdf4288f0ca125661b02cdebc5fb40ebc75e799fa7c93115bc9b5daac3aa5f</property> 
+			<property name="hibernate.connection.url">jdbc:postgresql://ec2-54-225-242-183.compute-1.amazonaws.com:5432/d1lp1ask32qoec</property> 
 			<property name="connection_pool_size">1</property> <property name="hbm2ddl.auto">update</property> 
-			<property name="show_sql">true</property> <mapping resource="Adrino.hbm.xml"></mapping> -->
-
+			<property name="show_sql">true</property> <mapping class="ayu.arduino.to.House"></mapping> 
+			<mapping class="ayu.arduino.to.LoginDetails"></mapping> <mapping class="ayu.arduino.to.Rooms"></mapping> 
+			<mapping class="ayu.arduino.to.Appliance"></mapping> -->
 
 	</session-factory>
 </hibernate-configuration>

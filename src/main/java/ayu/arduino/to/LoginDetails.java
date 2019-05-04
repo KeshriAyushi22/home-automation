@@ -42,7 +42,7 @@ public class LoginDetails {
 	
 	
 	@JsonProperty("ln")
-	@Column(name = "loginName", unique = true, length = 255)
+	@Column(name = "loginName", length = 255)
 	private String loginName;
 	
 	@JsonProperty("token")
@@ -59,10 +59,19 @@ public class LoginDetails {
 	private List<House> house;  //this is holding many values of house so to hold all the values rather than object it is taking list to hold that object.
 	
 	@JsonProperty("isActive")
-	@Column(name = "isActive", unique = true, nullable = false, length = 255)
+	@Column(name = "isActive", length = 255)
 	private String isActive;
 	
+	@JsonProperty("type")
+	@Column(name = "type",  length = 255)
+	private String type;
 	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public List<House> getHouse() {
 		return house;
 	}
