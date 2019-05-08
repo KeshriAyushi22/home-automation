@@ -12,6 +12,7 @@ import ayu.arduino.to.ApiResponse;
 import ayu.arduino.to.Appliance;
 import ayu.arduino.to.House;
 import ayu.arduino.to.LoginDetails;
+import ayu.arduino.to.Mail;
 import ayu.arduino.to.Rooms;
 
 
@@ -23,21 +24,21 @@ public class Register {
 
 		//inserting data into login db.
 		LoginDetails l= new LoginDetails();
-		l.setEmail("satyamNew@gmail.com");
-		l.setLoginName("satyamnew");
-		l.setAndroidId("Androidsatyamnew");
-		l.setPassword("PassWordsatyamnew");
-		l.setToken("TokenNew1");
+		l.setEmail("ayushi1994keshri@gmail.com");
+		l.setLoginName("ayushikeshri");
+		l.setAndroidId("ayushiAndroid2");
+		l.setPassword("PassWordayushi2");
+		l.setToken("TokenAyushi2");
 
 		//inserting 2 objects inside house db.
 		House h= new House();
-		h.setHouseName("House3");
-		h.setAddress("Address3");
+		h.setHouseName("House122");
+		h.setAddress("Address122");
 		h.setLoginDetails(l);   //since there is one mapping so add that object here.
 
 		House h1= new House();
-		h1.setHouseName("House NAME4");
-		h1.setAddress("Address 4");
+		h1.setHouseName("House NAME221");
+		h1.setAddress("Address221");
 		h1.setLoginDetails(l);   //since there is one mapping so add that object here.
 
 		//for setting list of house to login details.
@@ -55,15 +56,15 @@ public class Register {
 		
 		
 		Appliance ap=new Appliance();
-		ap.setFan("FanROOM1");
-		ap.setLights("LightROOM1");
-		ap.setPlug("PlugROOM1");
+		ap.setFan("FanROOM112");
+		ap.setLights("LightROOM112");
+		ap.setPlug("PlugROOM112");
 		
 
 		Appliance ap2=new Appliance();
-		ap2.setFan("Fan2ROOM");
-		ap2.setLights("Light2ROOM");
-		ap2.setPlug("Plug2ROOM");
+		ap2.setFan("Fan221ROOM");
+		ap2.setLights("Light221ROOM");
+		ap2.setPlug("Plug221ROOM");
 		
 
 		List<Appliance> listAp= new ArrayList<Appliance>();
@@ -90,14 +91,21 @@ public class Register {
 		h.setRooms(listRoom);
 
 		
+		Mail m= new Mail();
+		m.setLoginDetail(l);
+		m.setActive("pending");
+		m.setHash("UserId123");
+		
+		
 		DaoImpl.saveData(ap);
 		DaoImpl.saveData(ap2);
 		DaoImpl.saveData(l);
 		DaoImpl.saveData(r);
 		DaoImpl.saveData(r2);
+		DaoImpl.saveData(m);
 		DaoImpl.saveData(h);  //saving parent class first and then its foreign key holding class(called as child class.)
 		DaoImpl.saveData(h1);
-		
+	
 
 
 

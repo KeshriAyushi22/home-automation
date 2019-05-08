@@ -9,7 +9,10 @@ C:\JsPractice\arduino\src\main\java\ayu\arduino\to\Appliance.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\to\Rooms.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\controller\MainAPI.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\dao\DaoImpl.java
+C:\JsPractice\arduino\src\main\java\ayu\arduino\to\VerifyTokenConfirmationMail.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\helper\AppHelper.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\helper\JsonHelper.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\util\IsNullorEmpty.java
+C:\JsPractice\arduino\src\main\java\ayu\arduino\service\Activation.java
 C:\JsPractice\arduino\src\main\java\ayu\arduino\service\Login.java
+C:\JsPractice\arduino\src\main\java\ayu\arduino\to\Mail.java

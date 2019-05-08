@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,20 +23,22 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "Login_Details", uniqueConstraints = {
 @UniqueConstraint(columnNames = "androidId"),
-@UniqueConstraint(columnNames = "email") })
+@UniqueConstraint(columnNames = "email"),@UniqueConstraint(columnNames = "userId") })
 public class LoginDetails {
 	
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "loginId", unique = true, nullable = false)
-	private int loginId;*/
+	
 	
 	@Id
 	@JsonProperty("email")
 	@Column(name = "email", unique = true, nullable = false,length = 255)
 	private String email;
 	
+	@JsonProperty("userId")
+	@Column(name = "userId", unique = true, length = 255)
+	private String userId;
 	
+	
+
 	@JsonProperty("androidId")
 	@Column(name = "androidId", unique = true, length = 255)
 	private String androidId;
@@ -60,12 +63,23 @@ public class LoginDetails {
 	
 	@JsonProperty("isActive")
 	@Column(name = "isActive", length = 255)
-	private String isActive;
+	private boolean isActive;
 	
 	@JsonProperty("type")
 	@Column(name = "type",  length = 255)
 	private String type;
 	
+	@OneToOne(mappedBy ="loginDetail")
+	private Mail mail;
+	
+	
+	
+	public Mail getMail() {
+		return mail;
+	}
+	public void setMail(Mail mail) {
+		this.mail = mail;
+	}
 	public String getType() {
 		return type;
 	}
@@ -81,10 +95,11 @@ public class LoginDetails {
 
 	
 	
-	public String getIsActive() {
+	
+	public boolean isActive() {
 		return isActive;
 	}
-	public void setIsActive(String isActive) {
+	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 	public String getEmail() {
@@ -123,6 +138,18 @@ public class LoginDetails {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	public LoginDetails() {
+		//by default the email is inactive.
+		super();
+      
 	}
 	
 	

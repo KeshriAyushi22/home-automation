@@ -3,7 +3,6 @@ package ayu.arduino.service;
 import java.util.List;
 
 import ayu.arduino.dao.DaoImpl;
-import ayu.arduino.to.ApiRequest;
 import ayu.arduino.to.ApiResponse;
 import ayu.arduino.to.House;
 import ayu.arduino.to.LoginDetails;
@@ -22,9 +21,11 @@ public class Login {
 
 		ApiResponse response= new ApiResponse();
 		if(!IsNullorEmpty.isNullOrEmpty(req.getEmail())) {
-			LoginDetails list=DaoImpl.getDetails(req);
-			if(!IsNullorEmpty.isNullOrEmpty(list)) {
-				List<House> houseList= list.getHouse();
+			LoginDetails detail=DaoImpl.getDetails(req);
+			
+			
+			if(!IsNullorEmpty.isNullOrEmpty(detail)&& detail.isActive()==true) {
+				List<House> houseList= detail.getHouse();
 				for(House house:houseList) {
 					rooms=  house.getRooms();
 
@@ -36,6 +37,10 @@ public class Login {
 
 
 
+			}else {
+				response.setErrorCode("1111");;
+				response.setErrorStatus("Email is inactive");
+				
 			}
 		}else {
 			response.setErrorCode("1111");;

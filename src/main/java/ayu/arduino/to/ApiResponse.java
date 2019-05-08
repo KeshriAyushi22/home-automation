@@ -2,6 +2,10 @@ package ayu.arduino.to;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_NULL)
 public class ApiResponse {
 	private String resStatus;
 	private String resCode;

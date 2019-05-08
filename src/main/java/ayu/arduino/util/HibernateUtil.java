@@ -28,7 +28,7 @@ public class HibernateUtil {
 		return (sessionFactory!=null)?sessionFactory:buildSessionFactory();
 		
 	}
-
+	
 	public static void shutdown() {
 		getSessionFactory().close();
 	}
