@@ -1,7 +1,7 @@
-package ayu.arduino.service;
+/*package ayu.arduino.service;
 
 import java.util.Properties;
-import java.util.Random;
+
 
 import javax.mail.Session;
 
@@ -9,9 +9,7 @@ import javax.mail.Session;
 import javax.mail.*;
 import javax.mail.internet.*;
 
-import org.apache.commons.codec.digest.DigestUtils;
 
-import ayu.arduino.to.ApiRequest;
 import ayu.arduino.to.LoginDetails;
 
 
@@ -63,3 +61,4 @@ public static void doAccountActivation(LoginDetails request){
 	}
 	
 
+*/

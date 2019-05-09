@@ -11,9 +11,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import ayu.arduino.service.Activation;
+
+//import ayu.arduino.service.Activation;
 import ayu.arduino.to.ApiRequest;
 import ayu.arduino.to.LoginDetails;
 import ayu.arduino.to.Mail;
@@ -24,7 +24,7 @@ import ayu.arduino.util.HibernateUtil;
 public class DaoImpl implements Serializable{
 private static final long serialVersionUID = 1L;
 
-@Autowired 
+
 private static SessionFactory sessionFactory;
 private static Session session;
 private static Session currentSession() {
