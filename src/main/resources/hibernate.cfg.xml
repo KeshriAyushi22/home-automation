@@ -30,6 +30,7 @@
 		<mapping class="ayu.arduino.to.LoginDetails"></mapping>
 		<mapping class="ayu.arduino.to.Rooms"></mapping>
 		<mapping class="ayu.arduino.to.Appliance"></mapping>
+		<mapping class="ayu.arduino.to.Mail"></mapping>
 
 	</session-factory>
 </hibernate-configuration>
