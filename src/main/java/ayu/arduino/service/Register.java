@@ -22,7 +22,7 @@ public class Register {
 	public static void doRegisteration() throws FileNotFoundException, IOException {
 		ApiResponse regResponse=new ApiResponse();
 
-		//inserting data into login db.
+		/*//inserting data into login db.
 		LoginDetails l= new LoginDetails();
 		l.setEmail("ayushi1994keshri@gmail.com");
 		l.setLoginName("ayushikeshri");
@@ -106,7 +106,93 @@ public class Register {
 		DaoImpl.saveData(h);  //saving parent class first and then its foreign key holding class(called as child class.)
 		DaoImpl.saveData(h1);
 	
+*/
+		
+		/*2nd data*/
+		LoginDetails login= new LoginDetails();
+		login.setEmail("satyamnaik15@gmail.com");
+		login.setLoginName("satyam");
+		login.setAndroidId("null");
+		login.setPassword("pass");
+		login.setNotificationToken("token");
 
+		//inserting 2 objects inside house db.
+		House samHouse= new House();
+		samHouse.setHouseName("satyamHouse");
+		samHouse.setAddress("Marathalli");
+		samHouse.setLoginDetails(login);   //since there is one mapping so add that object here.
+
+		House visHouse= new House();
+		visHouse.setHouseName("vishalHouse");
+		visHouse.setAddress("Marathalli Brigde");
+		visHouse.setLoginDetails(login  );   //since there is one mapping so add that object here.
+
+		//for setting list of house to login details.
+		List<House> listHouse= new ArrayList<House>();
+		listHouse.add(samHouse);
+		listHouse.add(visHouse);
+
+		//since loginDetail object contains house as a list lets add that here and save it
+		login.setHouse(listHouse);
+		
+
+		//inserting data into rooms db.
+
+		
+		
+		
+		Appliance samR1ap1=new Appliance();
+		samR1ap1.setFan("fanRoom1");
+		samR1ap1.setLights("lightRoom1");
+		samR1ap1.setPlug("plugRoom1");
+		
+
+		Appliance samHallap=new Appliance();
+		samHallap.setFan("fanHall");
+		samHallap.setLights("LightHall");
+		samHallap.setPlug("PlugHall");
+		
+
+		List<Appliance> listApp= new ArrayList<Appliance>();
+		listApp.add(samR1ap1);
+		listApp.add(samHallap);
+		
+		Rooms samR1= new Rooms();   
+		samR1.setAppliance(listApp);
+		samR1.setHouse(samHouse);
+		
+		
+		samR1ap1.setRooms(samR1);
+		
+		
+		Rooms samHall= new Rooms();
+		samHall.setAppliance(null);
+		samHall.setHouse(samHouse);
+		
+		samHallap.setRooms(samHall);
+		
+		//for setting list of rooms to house details.
+		List<Rooms> listRooms= new ArrayList<Rooms>();
+		listRooms.add(samR1);//making list of rooms to store it in house db.
+		listRooms.add(samHall);
+		samHouse.setRooms(listRooms);
+
+		
+		Mail mail= new Mail();
+		mail.setLoginDetail(login);
+		mail.setActive("pending");
+		mail.setHash("Sam123");
+		
+		
+		DaoImpl.saveData(samR1ap1);
+		DaoImpl.saveData(samHallap);
+		DaoImpl.saveData(login);
+		DaoImpl.saveData(samR1);
+		DaoImpl.saveData(samHall);
+		DaoImpl.saveData(mail);
+		DaoImpl.saveData(samHouse);  //saving parent class first and then its foreign key holding class(called as child class.)
+		DaoImpl.saveData(visHouse);
+	
 
 
 
@@ -115,34 +201,6 @@ public class Register {
 
 
 		
-/*		LoginDetails l= new LoginDetails();
-		l.setLoginId(98);
-		l.setEmail("ayush@gmail.com");
-		l.setLoginName("ayush");
-		l.setAndroidId("android");
-		l.setPassword("pass");
-		l.setToken("token1");
-
-		House h= new House();
-		h.setHouseId("101");
-		h.setAddress("kolkata");
-		h.setLoginDetails(l);
-		
-		House h1= new House();
-		h1.setHouseId("201");
-		h1.setAddress("varanasi");
-		h1.setLoginDetails(l);
-		
-
-//		List<House> list= new ArrayList<House>();
-//		list.add(h);
-//		list.add(h1);
-
-//		l.setHouse(list);
-		DaoImpl.saveData(l);
-		DaoImpl.saveData(h);
-		DaoImpl.saveData(h1);*/	
-
 
 
 

@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Room_Details", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "roomId")})
@@ -28,11 +30,14 @@ public class Rooms {
 	/*@Column(name = "roomName",  length = 255)
 	private String roomName;*/
 
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="houseName")
 	@ElementCollection(targetClass=House.class)
 	private House house;
 
+	
+	//@JsonIgnore
 	@Column(name = "appliance",  length = 255)
 	@OneToMany(mappedBy="rooms" ,cascade=CascadeType.ALL)
 	private List<Appliance> appliance;

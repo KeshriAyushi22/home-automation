@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import ayu.arduino.dao.DaoImpl;
-
+import ayu.arduino.helper.RandomGenerator;
+import ayu.arduino.service.Activation;
 import ayu.arduino.service.Login;
 import ayu.arduino.service.Register;
 
@@ -40,7 +41,7 @@ public class MainAPI {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Object test() {
 		System.out.println("checking the connection");
-	return "connection done";
+		return "connection done";
 
 	}
 
@@ -49,30 +50,54 @@ public class MainAPI {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public ApiResponse login(String request) throws JsonParseException, JsonMappingException, IOException {
-		
+
 		String error=null;
-		
+
 		ObjectMapper mapper = new ObjectMapper();
 		LoginDetails req= mapper.readValue(request, LoginDetails.class);
 		ApiResponse response=null;
 		//validation
-		
+
 		if(IsNullorEmpty.isNullOrEmpty(error)) {
-		response = Login.dologin(req);
-		System.out.println("response success"+response);
+			response = Login.dologin(req);
+			System.out.println("response success"+response);
 
 		}
-	
-		
+
+
 		return response;
 
 	}
 	
 	
+	
+	@POST
+	@Path("/home")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ApiResponse homeApi(String request) throws JsonParseException, JsonMappingException, IOException {
+
+		String error=null;
+
+		ObjectMapper mapper = new ObjectMapper();
+		LoginDetails req= mapper.readValue(request, LoginDetails.class);
+		ApiResponse response=null;
+		//validation
+
+		if(IsNullorEmpty.isNullOrEmpty(error)) {
+			response = Login.HomeApi(req);
+			System.out.println("Home response success"+response);
+
+		}
+		return response;
+
+	}
+	
+
+
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
-
 	public void register(String request) throws JsonParseException, JsonMappingException, IOException {
 		System.out.println("coming to main api");
 		String error=null; //validate method to be implemented.
@@ -82,37 +107,82 @@ public class MainAPI {
 		//validation
 		if(IsNullorEmpty.isNullOrEmpty(error)) 
 			Register.doRegisteration();
-			
-		
-		
+
+
+
 
 	}
-	
-	/*@GET
-	@Path("/activateAccount")
-	
-	public String activate(@QueryParam("key1") String email,@QueryParam("key2") String name ) {
-	System.out.println("coming to get api of activation through link.");
-	
-	LoginDetails activationDetails=DaoImpl.getActivationDetails(email);
-	Mail mailDetails=activationDetails.getMail();
-		if(mailDetails.getActive().equalsIgnoreCase("pending")) {
-			mailDetails.setActive("activated");
-			DaoImpl.save(activationDetails);
-			
-		}
-		
-		
-		
-	return "account activated. Login again";
-		
 
-	}*/
-	
-	
-	
-	
-	
-	
-	
+	@POST
+	@Path("/forgetPassword")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ApiResponse forgetPassword(String request) throws JsonParseException, JsonMappingException, IOException {
+		ApiResponse response=new ApiResponse();
+		ObjectMapper mapper = new ObjectMapper();
+		LoginDetails req= mapper.readValue(request, LoginDetails.class);
+		String emailId=	req.getEmail();
+		String newPass=req.getNewPassword();
+		String passToken=RandomGenerator.randomAlphaNumeric(6);
+
+		LoginDetails loginDetails=DaoImpl.getEmailDetails(emailId);
+		if(!IsNullorEmpty.isNullOrEmpty(loginDetails)) {
+			if(loginDetails.isActive()==true) {
+				loginDetails.setNewPassword(newPass);
+				loginDetails.setPasswordToken(passToken);
+				DaoImpl.saveData(loginDetails);
+				Activation.doAccountActivation(loginDetails);
+				response.setResCode("0000");
+				response.setResStatus("activation link sent successfully!");
+			}
+
+		}else {
+			response.setErrorCode("1111");
+			response.setErrorStatus("Email doesn't exist");
+		}
+
+
+
+
+		return response;
+
+	}
+
+
+
+
+
+	@GET
+	@Path("/changePassword")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ApiResponse changePassword(@QueryParam("key1") String email,@QueryParam("key2") String token) {
+
+		//System.out.println("coming to get api to check whether the email is active or not before updating the password");
+
+		ApiResponse response=new ApiResponse();
+		LoginDetails loginDetails=DaoImpl.getActivationDetails(email,token);
+		if(!IsNullorEmpty.isNullOrEmpty(loginDetails)&&loginDetails.isActive()==true) {
+
+			loginDetails.setPassword(loginDetails.getNewPassword());
+			loginDetails.setPasswordToken("");
+			DaoImpl.saveData(loginDetails);
+			response.setResCode("0000");
+			response.setResStatus("password Change");
+
+		}else {
+			response.setErrorCode("1111");
+			response.setErrorStatus("email not in active state");
+		}
+
+
+		return response;
+
+
+	}
+
+
+
+
+
+
+
 }

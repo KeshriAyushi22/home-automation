@@ -14,9 +14,17 @@ public class ApiResponse {
 	private List<House> house;
 	private List<Appliance> appliance;
 	private List<Rooms> rooms;
+	private String loginName;
 	
 	
 	
+	
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
 	public List<Appliance> getAppliance() {
 		return appliance;
 	}

@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -22,138 +23,246 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Login_Details", uniqueConstraints = {
-@UniqueConstraint(columnNames = "androidId"),
-@UniqueConstraint(columnNames = "email"),@UniqueConstraint(columnNames = "userId") })
+		@UniqueConstraint(columnNames = "androidId"),
+		@UniqueConstraint(columnNames = "email"),@UniqueConstraint(columnNames = "userId") })
 public class LoginDetails {
-	
-	
-	
+
+
+
 	@Id
 	@JsonProperty("email")
 	@Column(name = "email", unique = true, nullable = false,length = 255)
 	private String email;
-	
+
 	@JsonProperty("userId")
 	@Column(name = "userId", unique = true, length = 255)
 	private String userId;
-	
-	
+
+
 
 	@JsonProperty("androidId")
 	@Column(name = "androidId", unique = true, length = 255)
 	private String androidId;
-	
-	
-	@JsonProperty("ln")
+
+
+	@JsonProperty("loginName")
 	@Column(name = "loginName", length = 255)
 	private String loginName;
-	
-	@JsonProperty("token")
-	@Column(name = "token", unique = true, nullable = false, length = 255)
-	private String token;
-	
-	
-	@JsonProperty("pass")
-	@Column(name = "password", unique = true, nullable = false, length = 255)
+
+	@JsonProperty("NotificationToken")
+	@Column(name = "NotificationToken", unique = true, length = 255)
+	private String NotificationToken;
+
+
+	@JsonProperty("password")
+	@Column(name = "password", unique = true,  length = 255)
 	private String password;
-	
-	@OneToMany(mappedBy="loginDetails" ,cascade=CascadeType.ALL)  //here mapped by value is the object created in house class for this pojo.
+
+	@JsonProperty("newPassword")
+	@Column(name = "NewPassword", unique = true, length = 255)
+	private String NewPassword;
+
+	@JsonProperty("passwordToken")
+	@Column(name = "passwordToken", unique = true, length = 255)
+	private String passwordToken;
+
+
+	@OneToMany(mappedBy="loginDetails" ,cascade=CascadeType.ALL)
+	//here mapped by value is the object created in house class for this pojo.
 	@JsonProperty("house")
 	private List<House> house;  //this is holding many values of house so to hold all the values rather than object it is taking list to hold that object.
-	
+
 	@JsonProperty("isActive")
 	@Column(name = "isActive", length = 255)
 	private boolean isActive;
-	
+
 	@JsonProperty("type")
 	@Column(name = "type",  length = 255)
 	private String type;
-	
+
+	@JsonIgnore
 	@OneToOne(mappedBy ="loginDetail")
 	private Mail mail;
-	
-	
-	
-	public Mail getMail() {
-		return mail;
+
+
+
+
+	public String getEmail() {
+		return email;
 	}
-	public void setMail(Mail mail) {
-		this.mail = mail;
+
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getType() {
-		return type;
+
+
+
+
+	public String getUserId() {
+		return userId;
 	}
-	public void setType(String type) {
-		this.type = type;
+
+
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
+
+
+
+	public String getAndroidId() {
+		return androidId;
+	}
+
+
+
+
+	public void setAndroidId(String androidId) {
+		this.androidId = androidId;
+	}
+
+
+
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+
+
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+
+
+
+	public String getNotificationToken() {
+		return NotificationToken;
+	}
+
+
+
+
+	public void setNotificationToken(String notificationToken) {
+		NotificationToken = notificationToken;
+	}
+
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+	public String getNewPassword() {
+		return NewPassword;
+	}
+
+
+
+
+	public void setNewPassword(String newPassword) {
+		NewPassword = newPassword;
+	}
+
+
+
+
+	public String getPasswordToken() {
+		return passwordToken;
+	}
+
+
+
+
+	public void setPasswordToken(String passwordToken) {
+		this.passwordToken = passwordToken;
+	}
+
+
+
+
 	public List<House> getHouse() {
 		return house;
 	}
+
+
+
+
 	public void setHouse(List<House> house) {
 		this.house = house;
 	}
 
-	
-	
-	
+
+
+
 	public boolean isActive() {
 		return isActive;
 	}
+
+
+
+
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
-	public String getEmail() {
-		return email;
+
+
+
+
+	public String getType() {
+		return type;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+
+
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	
-	
-	public String getAndroidId() {
-		return androidId;
+
+
+
+
+	public Mail getMail() {
+		return mail;
 	}
-	public void setAndroidId(String androidId) {
-		this.androidId = androidId;
+
+
+
+
+	public void setMail(Mail mail) {
+		this.mail = mail;
 	}
-	
-	
-	public String getLoginName() {
-		return loginName;
-	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
-	}
-	
-	
-	public String getToken() {
-		return token;
-	}
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-	
+
+
+
+
 	public LoginDetails() {
-		//by default the email is inactive.
-		super();
-      
+		//by default the email is active.
+		this.isActive=true;
+
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -23,7 +24,7 @@ public class Mail {
 
 	
 	
-	
+	@JsonIgnore
 	@OneToOne( cascade=CascadeType.ALL)
 	@JoinColumn(name="email")
 	@ElementCollection(targetClass=LoginDetails.class)

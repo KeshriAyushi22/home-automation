@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -24,6 +26,7 @@ public class Appliance {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int appId;
 
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="roomId")
 	@ElementCollection(targetClass=Rooms.class)

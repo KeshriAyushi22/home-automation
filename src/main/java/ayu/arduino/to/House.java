@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -28,8 +30,7 @@ public class House {
 	private int houseId;
 	private String houseName;
 	private List<Rooms> rooms;
-	private LoginDetails loginDetails;  //here it is having object of each details linked to them by joining one field.
-	
+	private LoginDetails loginDetails; //here it is having object of each details linked to them by joining one field.
 	
 	
 	@Column(name = "address", nullable = false, length = 255)
@@ -50,7 +51,8 @@ public class House {
 		this.houseId = houseId;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@JsonIgnore
+	@ManyToOne(cascade=CascadeType.ALL,optional=false)
 	@JoinColumn(name="email")
 	@ElementCollection(targetClass=LoginDetails.class)
 	public LoginDetails getLoginDetails() {
