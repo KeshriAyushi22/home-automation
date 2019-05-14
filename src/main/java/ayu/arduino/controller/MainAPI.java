@@ -54,23 +54,19 @@ public class MainAPI {
 
 		String error=null;
 		ApiResponse response=new ApiResponse();
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-			//validation
+		ObjectMapper mapper = new ObjectMapper();
+		LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-			if(IsNullorEmpty.isNullOrEmpty(error)) {
-				response = Login.dologin(req);
-				System.out.println("response success"+response);
+		//validation
 
-			}
+		if(IsNullorEmpty.isNullOrEmpty(error)) {
+			response = Login.dologin(req);
+			System.out.println("response success"+response);
 
-		}catch(Exception e) {
-			System.out.println(e);
-		}finally {
-			HibernateUtil.shutdown();
 		}
+
+
 
 		return response;
 
@@ -86,22 +82,18 @@ public class MainAPI {
 
 		String error=null;
 		ApiResponse response=null;
-		try{
-			ObjectMapper mapper = new ObjectMapper();
-			LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-			//validation
+		ObjectMapper mapper = new ObjectMapper();
+		LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-			if(IsNullorEmpty.isNullOrEmpty(error)) {
-				response = Login.HomeApi(req);
-				System.out.println("Home response success"+response);
+		//validation
 
-			}
-		}catch(Exception e) {
-			System.out.println(e);
-		}finally {
-			HibernateUtil.shutdown();
+		if(IsNullorEmpty.isNullOrEmpty(error)) {
+			response = Login.HomeApi(req);
+			System.out.println("Home response success"+response);
+
 		}
+
 
 		return response;
 
@@ -147,7 +139,7 @@ public class MainAPI {
 			if(loginDetails.isActive()==true) {
 				loginDetails.setNewPassword(newPass);
 				loginDetails.setPasswordToken(passToken);
-				DaoImpl.saveData(loginDetails);
+				DaoImpl.saveOrUpdate(loginDetails);
 				Activation.doAccountActivation(loginDetails);
 				response.setResCode("0000");
 				response.setResStatus("activation link sent successfully!");
@@ -175,14 +167,15 @@ public class MainAPI {
 	public ApiResponse changePassword(@QueryParam("key1") String email,@QueryParam("key2") String token) {
 
 		//System.out.println("coming to get api to check whether the email is active or not before updating the password");
-
 		ApiResponse response=new ApiResponse();
+
 		LoginDetails loginDetails=DaoImpl.getActivationDetails(email,token);
 		if(!IsNullorEmpty.isNullOrEmpty(loginDetails)&&loginDetails.isActive()==true) {
 
 			loginDetails.setPassword(loginDetails.getNewPassword());
 			loginDetails.setPasswordToken("");
-			DaoImpl.saveData(loginDetails);
+			loginDetails.setNewPassword("");
+			DaoImpl.saveOrUpdate(loginDetails);
 			response.setResCode("0000");
 			response.setResStatus("password Change");
 
@@ -190,7 +183,6 @@ public class MainAPI {
 			response.setErrorCode("1111");
 			response.setErrorStatus("email not in active state");
 		}
-
 
 		return response;
 

@@ -187,14 +187,14 @@ public class Register {
 		mail.setHash("Sam123");
 		
 		
-		DaoImpl.saveData(samR1ap1);
-		DaoImpl.saveData(samHallap);
-		DaoImpl.saveData(login);
-		DaoImpl.saveData(samR1);
-		DaoImpl.saveData(samHall);
-		DaoImpl.saveData(mail);
-		DaoImpl.saveData(samHouse);  //saving parent class first and then its foreign key holding class(called as child class.)
-		DaoImpl.saveData(visHouse);
+		DaoImpl.saveOrUpdate(samR1ap1);
+		DaoImpl.saveOrUpdate(samHallap);
+		DaoImpl.saveOrUpdate(login);
+		DaoImpl.saveOrUpdate(samR1);
+		DaoImpl.saveOrUpdate(samHall);
+		DaoImpl.saveOrUpdate(mail);
+		DaoImpl.saveOrUpdate(samHouse);  //saving parent class first and then its foreign key holding class(called as child class.)
+		DaoImpl.saveOrUpdate(visHouse);
 	
 
 

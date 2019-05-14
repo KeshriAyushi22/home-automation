@@ -24,57 +24,74 @@ import ayu.arduino.util.HibernateUtil;
 
 
 public class DaoImpl implements Serializable{
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
 
 
-private static Session session;
 
 
+	public static void saveOrUpdate(Object req) {
+		Session session =HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
 
-public static Session getSession() {
-	return session==null?HibernateUtil.getSessionFactory().openSession():session;
+		session.saveOrUpdate(req);
+		tx.commit();
+		session.close();  
+	}
 
-}
-
-
-
-public static void saveData(Object req) {
-		 session =getSession();
-			Transaction tx = session.beginTransaction();
-           
-			session.save(req);
-			tx.commit();
-			session.close();  
+	public static LoginDetails getDetails(LoginDetails request){
+		Session session=null;
+		LoginDetails obj=null;
+		try {
+			session =HibernateUtil.getSessionFactory().openSession();
+			Criteria criteria= session.createCriteria(LoginDetails.class);
+			criteria.add(Restrictions.eq("email", request.getEmail()));
+			criteria.add(Restrictions.eq("password", request.getPassword()));
+			obj = (LoginDetails) criteria.uniqueResult();
+		}catch(Exception e) {
+			System.out.println(e); 
+		}finally {
+			session.close();
 		}
 
-public static LoginDetails getDetails(LoginDetails request){
-	 session = getSession();
-   Criteria criteria= session.createCriteria(LoginDetails.class);
-   criteria.add(Restrictions.eq("email", request.getEmail()));
-   criteria.add(Restrictions.eq("password", request.getPassword()));
-    LoginDetails  obj = (LoginDetails) criteria.uniqueResult();
-	return obj;
-}
-public static LoginDetails getActivationDetails(String email,String token){
-	 session = getSession();
-   Criteria criteria= session.createCriteria(LoginDetails.class);
-   criteria.add(Restrictions.eq("email", email));
-   criteria.add(Restrictions.eq("passwordToken", token));
-   LoginDetails  obj = (LoginDetails) criteria.uniqueResult();
-	return obj;
-}
-
-
-
-public static LoginDetails getEmailDetails(String emailId) {
-	 session =getSession();
-	   Criteria criteria= session.createCriteria(LoginDetails.class);
-	   criteria.add(Restrictions.eq("email", emailId));
-	  
-	   LoginDetails  obj = (LoginDetails) criteria.uniqueResult();
 		return obj;
-}
+	}
+	public static LoginDetails getActivationDetails(String email,String token){
+		Session session=null;
+		LoginDetails obj=null;
+		try{
+			session = HibernateUtil.getSessionFactory().openSession();
+			Criteria criteria= session.createCriteria(LoginDetails.class);
+			criteria.add(Restrictions.eq("email", email));
+			criteria.add(Restrictions.eq("passwordToken", token));
+			obj = (LoginDetails) criteria.uniqueResult();
+		}catch(Exception e) {
+			System.out.println(e); 
+		}finally {
+			session.close();
+		}
+
+		return obj;
+	}
+
+
+
+	public static LoginDetails getEmailDetails(String emailId) {
+		Session session=null;
+		LoginDetails obj=null;
+		try{
+			session =HibernateUtil.getSessionFactory().openSession();
+			Criteria criteria= session.createCriteria(LoginDetails.class);
+			criteria.add(Restrictions.eq("email", emailId));
+
+			obj = (LoginDetails) criteria.uniqueResult();
+		}catch(Exception e) {
+			System.out.println(e); 
+		}finally {
+			session.close();
+		}
+		return obj;
+	}
 
 
 }
