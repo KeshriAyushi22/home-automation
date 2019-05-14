@@ -15,9 +15,9 @@ public class Activation extends Authenticator {
 
 	public static void doAccountActivation(LoginDetails request){
 
-		String from = "subhamnaik15@gmail.com";   //mail id which dont have 2 way verification with phone.
+		String from = "22keshri.ayushi@gmail.com";   //mail id which dont have 2 way verification with phone.
 		String to = request.getEmail();
-		String password = "lucky1234567";
+		String password = "@Ayushi.keshri22";
 		String token= request.getPasswordToken();
 
 		String host = "127.0.0.1";//or IP address  
