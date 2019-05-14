@@ -18,17 +18,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Appliance_Details", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "appId")})
+		@UniqueConstraint(columnNames = "app_id")})
 public class Appliance {
 	
 	@Id
-	@Column(name = "appId",  length = 255)
+	@Column(name = "app_id",  length = 255)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int appId;
 
 	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="roomId")
+	@JoinColumn(name="room_id")
 	@ElementCollection(targetClass=Rooms.class)
 	private Rooms rooms;
 

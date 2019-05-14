@@ -33,21 +33,8 @@ private static Session session;
 
 
 public static Session getSession() {
-	/*SessionFactory sessionfactory=HibernateUtil.getSessionFactory();
-	if(session==null) {
-//		if(sessionfactory.isClosed())
-		session=sessionfactory.openSession();
-//		else
-//		session=sessionfactory.getCurrentSession();
-	}else {
-		if(!session.isConnected())
-			session=sessionfactory.openSession();
-	}*/
-	
 	return session==null?HibernateUtil.getSessionFactory().openSession():session;
 
-
-	
 }
 
 

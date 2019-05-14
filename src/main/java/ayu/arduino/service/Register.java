@@ -14,12 +14,15 @@ import ayu.arduino.to.House;
 import ayu.arduino.to.LoginDetails;
 import ayu.arduino.to.Mail;
 import ayu.arduino.to.Rooms;
+import ayu.arduino.util.HibernateUtil;
 
 
 
 public class Register {
 
 	public static void doRegisteration() throws FileNotFoundException, IOException {
+		try {
+		
 		ApiResponse regResponse=new ApiResponse();
 
 		/*//inserting data into login db.
@@ -112,9 +115,9 @@ public class Register {
 		LoginDetails login= new LoginDetails();
 		login.setEmail("satyamnaik15@gmail.com");
 		login.setLoginName("satyam");
-		login.setAndroidId("null");
-		login.setPassword("pass");
-		login.setNotificationToken("token");
+		login.setAndroidId("123Android");
+		login.setPassword("password1");
+		login.setNotificationToken("token-notification");
 
 		//inserting 2 objects inside house db.
 		House samHouse= new House();
@@ -195,7 +198,11 @@ public class Register {
 	
 
 
-
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			HibernateUtil.shutdown();
+		}
 
 
 

@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "Login_Details", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "androidId"),
-		@UniqueConstraint(columnNames = "email"),@UniqueConstraint(columnNames = "userId") })
+		@UniqueConstraint(columnNames = "android_id"),
+		@UniqueConstraint(columnNames = "email"),@UniqueConstraint(columnNames = "user_id") })
 public class LoginDetails {
 
 
@@ -35,13 +35,13 @@ public class LoginDetails {
 	private String email;
 
 	@JsonProperty("userId")
-	@Column(name = "userId", unique = true, length = 255)
+	@Column(name = "user_id", unique = true, length = 255)
 	private String userId;
 
 
 
 	@JsonProperty("androidId")
-	@Column(name = "androidId", unique = true, length = 255)
+	@Column(name = "android_id", unique = true, length = 255)
 	private String androidId;
 
 
@@ -50,7 +50,7 @@ public class LoginDetails {
 	private String loginName;
 
 	@JsonProperty("NotificationToken")
-	@Column(name = "NotificationToken", unique = true, length = 255)
+	@Column(name = "notification_token", unique = true, length = 255)
 	private String NotificationToken;
 
 
@@ -59,11 +59,11 @@ public class LoginDetails {
 	private String password;
 
 	@JsonProperty("newPassword")
-	@Column(name = "NewPassword", unique = true, length = 255)
+	@Column(name = "new_password", unique = true, length = 255)
 	private String NewPassword;
 
 	@JsonProperty("passwordToken")
-	@Column(name = "passwordToken", unique = true, length = 255)
+	@Column(name = "password_token", unique = true, length = 255)
 	private String passwordToken;
 
 
@@ -258,6 +258,7 @@ public class LoginDetails {
 	public LoginDetails() {
 		//by default the email is active.
 		this.isActive=true;
+		this.passwordToken="noToken";
 
 	}
 

@@ -20,10 +20,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Room_Details", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "roomId")})
+		@UniqueConstraint(columnNames = "room_id")})
 public class Rooms {
 	@Id
-	@Column(name = "roomId",  length = 255)
+	@Column(name = "room_id",  length = 255)
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int roomId;
 	
@@ -32,7 +32,7 @@ public class Rooms {
 
 	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="houseName")
+	@JoinColumn(name="house_name")
 	@ElementCollection(targetClass=House.class)
 	private House house;
 

@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "House_Details", uniqueConstraints = {
-@UniqueConstraint(columnNames = "houseId")})
+@UniqueConstraint(columnNames = "house_id")})
 public class House {
 	private String address;
 	private int houseId;
@@ -42,7 +42,7 @@ public class House {
 	}
 	
 	@Id
-	@Column(name = "houseId", unique = true, nullable = false, length = 255 )
+	@Column(name = "house_id", unique = true, nullable = false, length = 255 )
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getHouseId() {
 		return houseId;
@@ -70,7 +70,7 @@ public class House {
 		this.rooms = rooms;
 	}
 	
-	@Column(name = "houseName", nullable = false, length = 255)
+	@Column(name = "house_name", nullable = false, length = 255)
 	public String getHouseName() {
 		return houseName;
 	}

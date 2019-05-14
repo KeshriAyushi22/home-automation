@@ -28,6 +28,7 @@ import ayu.arduino.service.Register;
 import ayu.arduino.to.ApiResponse;
 import ayu.arduino.to.LoginDetails;
 import ayu.arduino.to.Mail;
+import ayu.arduino.util.HibernateUtil;
 import ayu.arduino.util.IsNullorEmpty;
 
 
@@ -52,25 +53,31 @@ public class MainAPI {
 	public ApiResponse login(String request) throws JsonParseException, JsonMappingException, IOException {
 
 		String error=null;
+		ApiResponse response=new ApiResponse();
+		try {
+			ObjectMapper mapper = new ObjectMapper();
+			LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-		ObjectMapper mapper = new ObjectMapper();
-		LoginDetails req= mapper.readValue(request, LoginDetails.class);
-		ApiResponse response=null;
-		//validation
+			//validation
 
-		if(IsNullorEmpty.isNullOrEmpty(error)) {
-			response = Login.dologin(req);
-			System.out.println("response success"+response);
+			if(IsNullorEmpty.isNullOrEmpty(error)) {
+				response = Login.dologin(req);
+				System.out.println("response success"+response);
 
+			}
+
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			HibernateUtil.shutdown();
 		}
-
 
 		return response;
 
 	}
-	
-	
-	
+
+
+
 	@POST
 	@Path("/home")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,37 +85,48 @@ public class MainAPI {
 	public ApiResponse homeApi(String request) throws JsonParseException, JsonMappingException, IOException {
 
 		String error=null;
-
-		ObjectMapper mapper = new ObjectMapper();
-		LoginDetails req= mapper.readValue(request, LoginDetails.class);
 		ApiResponse response=null;
-		//validation
+		try{
+			ObjectMapper mapper = new ObjectMapper();
+			LoginDetails req= mapper.readValue(request, LoginDetails.class);
 
-		if(IsNullorEmpty.isNullOrEmpty(error)) {
-			response = Login.HomeApi(req);
-			System.out.println("Home response success"+response);
+			//validation
 
+			if(IsNullorEmpty.isNullOrEmpty(error)) {
+				response = Login.HomeApi(req);
+				System.out.println("Home response success"+response);
+
+			}
+		}catch(Exception e) {
+			System.out.println(e);
+		}finally {
+			HibernateUtil.shutdown();
 		}
+
 		return response;
 
 	}
-	
+
 
 
 	@POST
 	@Path("/register")
 	@Produces(MediaType.APPLICATION_JSON)
-	public void register(String request) throws JsonParseException, JsonMappingException, IOException {
+	public ApiResponse register(String request) throws JsonParseException, JsonMappingException, IOException {
 		System.out.println("coming to main api");
 		String error=null; //validate method to be implemented.
-		ObjectMapper mapper = new ObjectMapper();
-		/*ApiRequest req= mapper.readValue(request, ApiRequest.class);
-		ApiResponse response=new ApiResponse();*/
+		ApiResponse response=new ApiResponse();
 		//validation
-		if(IsNullorEmpty.isNullOrEmpty(error)) 
+		if(IsNullorEmpty.isNullOrEmpty(error)) {
 			Register.doRegisteration();
+			response.setResCode("1111");
+			response.setResStatus("registration success");
+		}else {
 
-
+			response.setErrorCode("0000");
+			response.setErrorStatus("error in registering the info.");
+		}
+		return response;
 
 
 	}
