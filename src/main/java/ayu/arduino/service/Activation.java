@@ -23,16 +23,16 @@ public class Activation extends Authenticator {
 		String host = "127.0.0.1";//or IP address  
 
 		//Get properties object    
-		Properties props = new Properties();    
+		Properties props = new Properties(); 
+		//using smtp via tls
 		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.setProperty("mail.transport.protocol", "smtp"); 
-		props.put("mail.smtp.socketFactory.port", "587");    
-		props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");    
-		props.put("mail.smtp.auth", "true");    
-		props.put("mail.smtp.port", "587");  
-	    props.put("mail.smtp.socketFactory.fallback", "false");
-	    props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
 	    
+        
+        
+        //using smtp via ssl
 	   /* props.setProperty("mail.transport.protocol", "smtp");     
 	    props.setProperty("mail.host", "smtp.gmail.com");  
 	    props.put("mail.smtp.auth", "true");  
