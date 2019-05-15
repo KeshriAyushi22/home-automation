@@ -3,6 +3,10 @@ package ayu.arduino.to;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -66,7 +70,7 @@ public class LoginDetails {
 	@Column(name = "password_token", unique = true, length = 255)
 	private String passwordToken;
 
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="loginDetails" ,cascade=CascadeType.ALL)
 	//here mapped by value is the object created in house class for this pojo.
 	@JsonProperty("house")
@@ -80,6 +84,7 @@ public class LoginDetails {
 	@Column(name = "type",  length = 255)
 	private String type;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
 	@OneToOne(mappedBy ="loginDetail")
 	private Mail mail;

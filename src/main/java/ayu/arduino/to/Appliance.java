@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -26,6 +29,7 @@ public class Appliance {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int appId;
 
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="room_id")

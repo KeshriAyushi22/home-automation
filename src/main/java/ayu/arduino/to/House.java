@@ -1,13 +1,11 @@
 package ayu.arduino.to;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -51,6 +52,7 @@ public class House {
 		this.houseId = houseId;
 	}
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
 	@JoinColumn(name="email")
@@ -62,6 +64,7 @@ public class House {
 		this.loginDetails = loginDetails;
 	}
 	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(mappedBy="house" ,cascade=CascadeType.ALL) 
 	public List<Rooms> getRooms() {
 		return rooms;

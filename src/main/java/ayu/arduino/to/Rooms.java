@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -29,14 +31,14 @@ public class Rooms {
 	
 	/*@Column(name = "roomName",  length = 255)
 	private String roomName;*/
-
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="house_name")
 	@ElementCollection(targetClass=House.class)
 	private House house;
 
-	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	//@JsonIgnore
 	@Column(name = "appliance",  length = 255)
 	@OneToMany(mappedBy="rooms" ,cascade=CascadeType.ALL)
